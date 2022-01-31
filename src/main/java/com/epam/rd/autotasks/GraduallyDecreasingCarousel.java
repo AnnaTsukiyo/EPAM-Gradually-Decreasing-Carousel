@@ -20,19 +20,21 @@ public class GraduallyDecreasingCarousel extends DecrementingCarousel {
 
     @Override
     public int next() {
-        if (arr.length == 0 || Arrays.stream(arr).sum() == 0)
+        if (arr.length == 0 || Arrays.stream(arr).sum() == 0) {
             return -1;
-
-        if (i >= capacity)
+        }
+        if (i >= capacity) {
             while (arr[i] == 0) {
                 i++;
                 if (i > arr.length - 1)
                     i = 0;
             }
-
-        if (arr[i] > 0)
-            return arr[i++]--;
-
+        }
+        for (int j = 0; j < capacity - 1; j++) {
+            if (arr[i] > 0) {
+                return arr[i++]--;
+            }
+        }
         return 0;
     }
 
