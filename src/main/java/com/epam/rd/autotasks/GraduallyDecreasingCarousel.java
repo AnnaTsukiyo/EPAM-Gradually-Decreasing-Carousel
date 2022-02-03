@@ -4,10 +4,6 @@ import java.util.Arrays;
 
 public class GraduallyDecreasingCarousel extends DecrementingCarousel {
 
-    public GraduallyDecreasingCarousel(final int capacity) {
-        super(capacity);
-    }
-
     protected int[] arr;
     protected int capacity;
     private int i = 0;
