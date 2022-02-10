@@ -3,31 +3,54 @@ package com.epam.rd.autotasks;
 import java.util.Arrays;
 
 public class CarouselRun {
+    private int[] carousel;
+    private int cursor;
+    private int action;
+    private int gradully = 1;
 
-    protected int[] arr;
-    protected int capacity;
-    private int i = 0;
+    public CarouselRun(int[] carousel, int action) {
+        this.carousel = carousel;
+        this.action = action;
+    }
 
     public int next() {
-        if (arr.length == 0 || Arrays.stream(arr).sum() == 0)
+        if (isFinished()) {
             return -1;
-
-        if (i >= capacity)
-            i = 0;
-
-        while (arr[i] == 0) {
-            i++;
-            if (i > arr.length - 1)
-                i = 0;
         }
-
-        if (arr[i] > 0)
-            return arr[i++]--;
-
-        return 0;
+        while (carousel[cursor] <= 0) {
+            if (cursor >= carousel.length - 1) {
+                gradully++;
+                cursor = 0;
+                continue;
+            }
+            cursor++;
+        }
+        int nextEl = carousel[cursor];
+        switch (action) {
+            case 0:
+                carousel[cursor]--;
+                break;
+            case 1:
+                carousel[cursor] = carousel[cursor] - gradully;
+                break;
+            default:
+        }
+        cursor++;
+        if (cursor == carousel.length){
+            cursor = 0;
+            gradully++;
+        }
+        return nextEl;
     }
 
     public boolean isFinished() {
-        return Arrays.stream(arr).sum() == 0;
+        for (int i = 0; i < carousel.length; i++) {
+            if (carousel[i] > 0) {
+                return false;
+            }
+        }
+        return true;
+
     }
+
 }

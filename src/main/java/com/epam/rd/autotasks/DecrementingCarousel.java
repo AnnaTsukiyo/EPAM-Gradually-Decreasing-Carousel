@@ -1,30 +1,45 @@
 package com.epam.rd.autotasks;
 
-public class DecrementingCarousel extends CarouselRun {
+import java.util.Arrays;
 
-    private int full = 0;
-    private boolean runEd = false;
+public class DecrementingCarousel {
+    private int capacity;
+    private int[] carousel;
+    private int headAdd = 0;
+    private boolean carousRan = false;
 
     public DecrementingCarousel(int capacity) {
-        DecrementingCarousel.this.capacity = capacity;
-        DecrementingCarousel.this.arr = new int[capacity];
+        this.capacity = capacity;
+        carousel = new int[capacity];
+        Arrays.fill(carousel, 0);
     }
 
     public boolean addElement(int element) {
-        if (full < capacity && !runEd && element > 0) {
-            arr[full] = element;
-            full++;
+        if (element > 0 && headAdd < capacity && !carousRan) {
+            carousel[headAdd] = element;
+            headAdd++;
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     public CarouselRun run() {
-        if (!runEd) {
-            runEd = true;
-            return this;
-        } else
-            return null;
+        if (!carousRan) {
+            carousRan = true;
+            return new CarouselRun(carousel, 0);
+        }
+        return null;
+    }
+
+    public int[] getCarousel() {
+        return carousel;
+    }
+
+    public boolean isCarousRan() {
+        return carousRan;
+    }
+
+    public void setCarousRan(boolean carousRan) {
+        this.carousRan = carousRan;
     }
 }
