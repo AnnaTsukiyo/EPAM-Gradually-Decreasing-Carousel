@@ -1,8 +1,6 @@
 package com.epam.rd.autotasks;
 
-import java.util.Arrays;
-
-ppublic class GraduallyDecreasingCarousel extends DecrementingCarousel{
+public class GraduallyDecreasingCarousel extends DecrementingCarousel{
     public GraduallyDecreasingCarousel(final int capacity) {
         super(capacity);
     }
